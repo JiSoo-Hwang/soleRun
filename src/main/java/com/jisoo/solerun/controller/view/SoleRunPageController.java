@@ -20,12 +20,6 @@ public class SoleRunPageController {
         this.runService=runService;
     }
 
-    @GetMapping("/")
-    public String mainPage(Model model){
-        model.addAttribute("logoText","SoleRun");
-        return "main/index";
-    }
-
     @GetMapping("/myRunList.do")
     public ModelAndView myRunList(ModelAndView mv){
         List<Run>runs = runService.selectRun();

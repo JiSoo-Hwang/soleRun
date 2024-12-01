@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title th:text="'SoleRun - Home'"></title>
+</head>
+<body>
+<!-- 헤더 -->
+<header>
+    <div class="logo">SoleRun</div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search">
+        <button>🔍</button>
+    </div>
+</header>
+
+<!-- 네비게이션 바 -->
+<nav>
+    <a href="/" th:href="@{/}">My Run</a>
+    <a href="/our-run" th:href="@{/our-run}">Our Run</a>
+    <a href="/races" th:href="@{/races}">Races</a>
+    <a href="/store" th:href="@{/store}">Store</a>
+</nav>
+
+<!-- 메인 콘텐츠 -->
+<main>
+    <h1>Welcome to SoleRun</h1>
+    <p>This is the main page of the project SoleRun.</p>
+</main>
+
+<!-- 푸터 -->
+<footer>
+    <div class="info">&copy; 2024 SoleRun. All rights reserved.</div>
+    <div class="ad">광고 영역</div>
+</footer>
+</body>
+</html>
