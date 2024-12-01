@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="'SoleRun - My Run List'"></title>
+    <style>
+        /* 기본 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+            font-weight: bold;
+        }
+
+        /* 새 글 작성 버튼 스타일 */
+        .new-post-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            text-align: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .new-post-button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .new-post-button a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="logo">SoleRun</div>
+    <div class="header-right">
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button>🔍</button>
+        </div>
+        <a href="#" class="login-button">Login</a>
+    </div>
+</header>
+<nav>
+    <a href="#">My Run</a>
+    <a href="#">Our Run</a>
+    <a href="#">Races</a>
+    <a href="#">Store</a>
+</nav>
+<div class="container">
+    <div class="sidebar">
+        <p>My Run</p>
+        <p>Our Run</p>
+        <p>Races</p>
+        <p>Store</p>
+        <p>Section 5</p>
+        <p>...</p>
+    </div>
+    <div class="content">
+        <h2>My Run</h2>
+        <p>나의 러닝 이야기</p>
+        <table>
+            <thead>
+            <tr>
+                <th>번호</th>
+                <th>제목</th>
+                <th>작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 데이터가 들어갈 자리 -->
+            <tr th:if="${#lists.isEmpty(runs)}">
+                <td></td>
+                <td>조회된 게시글이 없습니다.</td>
+                <td></td>
+            </tr>
+            <tr th:each="run:${runs}">
+                <td th:text="${run.runId}"></td>
+                <td th:href="@{/myRunDetail.do?{id}(id=${runId)}" th:text="${run.runTitle}"></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+        <!-- 플로팅 버튼 -->
+        <button class="new-post-button">
+            <a href="/myRunForm.do">새 글 작성</a>
+        </button>
+    </div>
+    <div class="sidebar right">
+        <p>Feature 1</p>
+        <p>Feature 2</p>
+        <p>Feature 3</p>
+        <p>...</p>
+    </div>
+</div>
+<footer>
+    <div class="info">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
+            magna aliqua.</p>
+    </div>
+    <div class="ad">
+        <p>(광고 이미지)</p>
+    </div>
+</footer>
+</body>
+</html>

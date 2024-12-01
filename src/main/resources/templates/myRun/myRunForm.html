@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'SoleRun - Write Your Story'">Write Your Story</title>
+    <style>
+        /* 기본 스타일 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+        }
+
+        header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            color: white;
+            padding: 10px 0;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .content {
+            background-color: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .content h2 {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .form-buttons button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-buttons button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            margin-top: 20px;
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+<body>
+<!-- 헤더 -->
+<header>
+    <div class="logo">SoleRun</div>
+    <div>
+        <a href="#" class="login-button">Login</a>
+    </div>
+</header>
+
+<!-- 네비게이션 바 -->
+<nav>
+    <a href="/" th:href="@{/}">My Run</a>
+    <a href="/our-run" th:href="@{/our-run}">Our Run</a>
+    <a href="/races" th:href="@{/races}">Races</a>
+    <a href="/store" th:href="@{/store}">Store</a>
+</nav>
+
+<!-- 글 작성 폼 -->
+<div class="container">
+    <div class="content">
+        <h2>Write Your Story Here</h2>
+        <p>당신의 러닝 이야기를 들려주세요 :)</p>
+        <form action="/myRun/save.do" method="post">
+            <div class="form-group">
+                <label for="title">제목을 적어주세요</label>
+                <input type="text" id="title" name="runTitle" placeholder="제목을 입력하세요" required>
+            </div>
+            <div class="form-group">
+                <label for="content">내용을 적어주세요</label>
+                <textarea id="content" name="runStory" rows="10" placeholder="내용을 입력하세요" required></textarea>
+            </div>
+            <div class="form-buttons">
+                <button type="button" th:onclick="window.location.href='@{/myRunList}'">목록</button>
+                <button type="submit">저장</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- 푸터 -->
+<footer>
+    <p>&copy; 2024 SoleRun. All rights reserved.</p>
+</footer>
+</body>
+</html>
