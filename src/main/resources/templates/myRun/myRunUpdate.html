@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <title>Title</title>
+</head>
+<body>
+<!-- 헤더 -->
+<header>
+    <div class="logo">SoleRun</div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search">
+        <button>🔍</button>
+    </div>
+</header>
+
+<!-- 네비게이션 바 -->
+<nav>
+    <a href="/" th:href="@{/myRunList.do}">My Run</a>
+    <a href="/our-run" th:href="@{/our-run}">Our Run</a>
+    <a href="/races" th:href="@{/races}">Races</a>
+    <a href="/store" th:href="@{/store}">Store</a>
+</nav>
+
+<main>
+    <form action="/update.do" method="post" id="updateForm">
+        <input type="hidden" name="id" th:value="${run.runId}">
+
+        <!--제목 입력-->
+        <label for="title">제목</label>
+        <input type="text" id="title" name="title" th:value="${run.runTitle}">
+
+        <!--내용 입력-->
+        <label for="story">내용</label>
+        <textarea id="story" name="story" rows="5" cols="30" th:text="${run.runStory}"></textarea>
+
+        <button type="submit" id="updateBtn">수정</button>
+    </form>
+    <button onclick="location.href='/myRunList.do'">목록으로</button>
+</main>
+<script>
+    document.getElementById("updateBtn").addEventListener("click",function(event){
+        event.preventDefault();
+        const formData = new FormData(document.getElementById("updateForm"));
+        const data = Object.fromEntries(formData.entries());
+        console.log(data);
+        fetch('/update.do',{
+        method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                },
+            body:JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            if (result.status === "success"){
+                alert(result.message);
+                window.location.href = "/myRunList.do";
+            }else{
+                alert(result.message);
+                window.location.href = "/myRunList.do";
+            }
+        })
+        .catch(error => console.error('Error:',error));
+    });
+</script>
+<!-- 푸터 -->
+<footer>
+    <div class="info">&copy; 2024 SoleRun. All rights reserved.</div>
+    <div class="ad">광고 영역</div>
+</footer>
+</body>
+</html>
