@@ -2,9 +2,62 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title>Title</title>
 </head>
 <body>
+<!-- 헤더 -->
+<header>
+    <div class="logo">SoleRun</div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search">
+        <button>🔍</button>
+    </div>
+</header>
 
+<!-- 네비게이션 바 -->
+<nav>
+    <a href="/" th:href="@{/myRunList.do}">My Run</a>
+    <a href="/our-run" th:href="@{/our-run}">Our Run</a>
+    <a href="/races" th:href="@{/races}">Races</a>
+    <a href="/store" th:href="@{/store}">Store</a>
+</nav>
+
+<main>
+    <h1 th:text="'게시글 제목: ' + ${run.runTitle}"></h1>
+    <p th:text="'작성일: ' + ${run.postDate}"></p>
+    <p th:text="'내용: ' + ${run.runStory}"></p>
+    <a th:href="@{/myRun/update/{id}(id=${run.runId})}" class="button">글 수정하기</a>
+    <a th:href="@{/myRun/delete/{id}(id=${run.runId})}" class="button">글 삭제하기</a>
+    <button onclick="location.href='/myRunList.do'">목록으로</button>
+</main>
+
+<script>
+   <!-- document.getElementById("deleteBtn").addEventListener("click",function(event){
+    event.preventDefault();
+    const runId = this.getAttribute("data-id");
+    console.log("RUN_ID:",runId);
+    fetch(`/myRun/delete/${runId}`, {
+        method:'GET'
+        })
+        .then(response=>response.json())
+        .then(result=>{
+        console.log("Result:",result);
+        if(result.status === "success"){
+            alert(result.message);
+            window.location.href="/myRunList.do";
+        }else{
+            alert(result.message);
+            window.location.href = "/myRunList.do";
+        }
+        })
+        .catch(error => console.error('Error:',error));
+    });-->
+</script>
+<!-- 푸터 -->
+<footer>
+    <div class="info">&copy; 2024 SoleRun. All rights reserved.</div>
+    <div class="ad">광고 영역</div>
+</footer>
 </body>
 </html>
