@@ -2,27 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <title th:text="'SoleRun - My Run List'"></title>
     <style>
-        /* 기본 스타일 */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
         /* 테이블 스타일 */
         table {
             width: 100%;
@@ -70,31 +52,25 @@
     </style>
 </head>
 <body>
+<!-- 헤더 -->
 <header>
     <div class="logo">SoleRun</div>
-    <div class="header-right">
-        <div class="search-bar">
-            <input type="text" placeholder="Search">
-            <button>🔍</button>
-        </div>
-        <a href="#" class="login-button">Login</a>
+    <div class="search-bar">
+        <input type="text" placeholder="Search">
+        <button>🔍</button>
     </div>
 </header>
+
+<!-- 네비게이션 바 -->
 <nav>
-    <a href="#">My Run</a>
-    <a href="#">Our Run</a>
-    <a href="#">Races</a>
-    <a href="#">Store</a>
+    <a href="/" th:href="@{/myRunList.do}">My Run</a>
+    <a href="/our-run" th:href="@{/our-run}">Our Run</a>
+    <a href="/races" th:href="@{/races}">Races</a>
+    <a href="/store" th:href="@{/store}">Store</a>
 </nav>
-<div class="container">
-    <div class="sidebar">
-        <p>My Run</p>
-        <p>Our Run</p>
-        <p>Races</p>
-        <p>Store</p>
-        <p>Section 5</p>
-        <p>...</p>
-    </div>
+
+<!-- 메인 콘텐츠 -->
+<main>
     <div class="content">
         <h2>My Run</h2>
         <p>나의 러닝 이야기</p>
@@ -115,7 +91,9 @@
             </tr>
             <tr th:each="run:${runs}">
                 <td th:text="${run.runId}"></td>
-                <td th:href="@{/myRunDetail.do?{id}(id=${runId)}" th:text="${run.runTitle}"></td>
+                <td>
+                    <a th:href="@{/myRun/detail/{id}(id=${run.runId})}" th:text="${run.runTitle}"></a>
+                </td>
                 <td></td>
             </tr>
             </tbody>
@@ -125,21 +103,12 @@
             <a href="/myRunForm.do">새 글 작성</a>
         </button>
     </div>
-    <div class="sidebar right">
-        <p>Feature 1</p>
-        <p>Feature 2</p>
-        <p>Feature 3</p>
-        <p>...</p>
-    </div>
-</div>
+</main>
+
+<!-- 푸터 -->
 <footer>
-    <div class="info">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.</p>
-    </div>
-    <div class="ad">
-        <p>(광고 이미지)</p>
-    </div>
+    <div class="info">&copy; 2024 SoleRun. All rights reserved.</div>
+    <div class="ad">광고 영역</div>
 </footer>
 </body>
 </html>
