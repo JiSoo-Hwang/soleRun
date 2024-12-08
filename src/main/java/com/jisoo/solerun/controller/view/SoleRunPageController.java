@@ -1,7 +1,10 @@
 package com.jisoo.solerun.controller.view;
 
+import com.jisoo.solerun.dto.RunUpdateDto;
 import com.jisoo.solerun.entity.Run;
 import com.jisoo.solerun.service.RunService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,13 +38,22 @@ public class SoleRunPageController {
     @PostMapping("/myRun/save.do")
     public String saveRun(@ModelAttribute Run run){
         runService.saveRun(run);
-        return "redirect:/myrunlist.do";
+        return "redirect:/myRunList.do";
     }
 
-    @GetMapping("/myRunDetail.do")
+    @GetMapping("/myRun/detail/{id}")
     public String getRunDetail(@PathVariable Long id, Model model){
         Run run = runService.getRunById(id);
         model.addAttribute("run",run);
         return "myRun/myRunDetail";
     }
+
+    @GetMapping("/myRun/update/{id}")
+    public String updateRunPage(@PathVariable Long id, Model model){
+        Run run = runService.getRunById(id);
+        model.addAttribute("run",run);
+        return "myRun/myRunUpdate";
+    }
+
+
 }
